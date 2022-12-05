@@ -14,6 +14,8 @@ public class Game {
     private Lock lock;  //para la exclusion mutua
     private Condition full; //varibale de condicion
     private Condition empty; //varibale de condicion
+    private Condition unoccupied;
+    private Condition occupied;
 
     public Game(int rows, int columns, int maxPlayers, List<Player> players) {
 		board = new Board(rows, columns);
@@ -25,11 +27,11 @@ public class Game {
         empty = lock.newCondition(); 
 	}
 
-    public Board getboard() {
+    public Board getBoard() {
         return board;
     }
 
-    public void setboard(Board board) {
+    public void setBoard(Board board) {
         this.board = board;
     }
 
@@ -94,6 +96,40 @@ public class Game {
             currentPlayers --;
             System.err.print("OK\n");
             full.signal();
+        }
+        finally{
+            lock.unlock();
+        }
+
+    }
+
+    public void play() throws InterruptedException{
+        Player player = players.get(new Random().nextInt(currentPlayers));
+        Box box = board.getBoxes()[new Random().nextInt(board.rows())][new Random().nextInt(board.columns())];
+
+        lock.lock();
+        try {
+            while (Boolean.TRUE.equals(box.getOccupied())) {
+                occupied.await();
+            }
+            //sc
+            box.setOccupied(true);
+            box.setPlayerId(player.getId());
+            player.setTokens(player.getTokens() - 1);
+            switch (box.getType()) {
+                case 0:
+                player.setScore(player.getScore() + new Random().nextInt(100));
+                    break;
+                case 1:
+                player.setScore(player.getScore() * new Random().nextInt(4));
+                    break;
+                case 2:
+                
+                    break;
+                default:
+                    break;
+            }
+            
         }
         finally{
             lock.unlock();

@@ -24,12 +24,12 @@ public class Box {
         this.occupied = occupied;
     }
 
-    public int getType() {
-        return type;
+    public void setType(int type){
+        this.type = type;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public int getType() {
+        return type;
     }
 
     public int getPlayerId() {
@@ -39,8 +39,5 @@ public class Box {
     public void setPlayerId(int playerId) {
         this.playerId = playerId;
     }
-
-    
-
 
 }

@@ -10,11 +10,10 @@ import java.util.List;
 public class Player {
     private int score;
     private int id;
-    private List<Token> tokens;
+    private int tokens;
 
 	public Player(int id) {
 		this.id = id;
-		tokens = new ArrayList<Token>();
 	}
 
 	public int getScore() {
@@ -33,12 +32,12 @@ public class Player {
 		this.id = id;
 	}
 
-	public List<Token> getTokens() {
+	public int getTokens() {
 		return tokens;
 	}
 
-	public void setTokens(List<Token> tokens) {
+	public void setTokens(int tokens) {
 		this.tokens = tokens;
-	}    
-   
+	}
+
 }
