@@ -58,7 +58,7 @@ public class Game {
     }
 
     public void addPlayer() throws FullGameException, InterruptedException{
-        Player player = new Player(String., 0, players.size());
+        Player player = new Player(players.size());
 
         lock.lock();
 

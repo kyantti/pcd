@@ -1,11 +1,15 @@
 package main.java.es.unex.cum.pcd.practica6Monitores;
 
+import java.util.LinkedList;
+import java.util.List;
 
 public class App {
-    public static void main(String[] args) throws Exception {
-        F
-        List<Player> players = new Ar
-        Game game = new Game(0, 0, 0, null);
+    public static void main(String[] args) {
+        List<Player> players = new LinkedList<>();
+        for (int i = 0; i < 4; i++) {
+            players.add(new Player(players.size()));
+        }
+        Game game = new Game(0, 0, 10, players);
 
         System.out.println("Numero inicial de jugadores: " + game.getPlayers().size());
 
@@ -15,10 +19,10 @@ public class App {
 
         Thread in = new Thread(playerInThread);
         Thread out = new Thread(playerOutThread);
-        Thread count = new Thread(countPlayerThread);
+        
 
         in.start();
         out.start();
-        count.start();
+        countPlayerThread.start();
     }
 }

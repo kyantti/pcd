@@ -8,25 +8,13 @@ import java.util.List;
  */
 
 public class Player {
-    
-    private String nick;
     private int score;
     private int id;
     private List<Token> tokens;
 
-	public Player(String nick, int score, int id) {
-		this.nick = nick;
-		this.score = score;
+	public Player(int id) {
 		this.id = id;
 		tokens = new ArrayList<Token>();
-	}
-
-	public String getNick() {
-		return nick;
-	}
-
-	public void setNick(String nick) {
-		this.nick = nick;
 	}
 
 	public int getScore() {
