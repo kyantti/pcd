@@ -1,4 +1,4 @@
-package es.unex.cum.pcd.practica4Sincronizado;
+package main.java.es.unex.cum.pcd.practica4sincronizado;
 
 public class PlayerIn implements Runnable{
 

@@ -1,4 +1,4 @@
-package main.java.es.unex.cum.pcd.practica6Monitores;
+package main.java.es.unex.cum.pcd.practica6monitores;
 
 public class PlayerIn implements Runnable{
 
@@ -14,7 +14,7 @@ public class PlayerIn implements Runnable{
             try {
                 game.addPlayer();
                 Thread.sleep(500);
-            } catch (InterruptedException | FullGameException e) {
+            } catch (InterruptedException e) {
                 
             }
         }

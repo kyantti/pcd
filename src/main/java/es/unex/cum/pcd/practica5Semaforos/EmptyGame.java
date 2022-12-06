@@ -1,4 +1,4 @@
-package es.unex.cum.pcd.practica5Semaforos;
+package main.java.es.unex.cum.pcd.practica5semaforos;
 
 public class EmptyGame extends Exception{
     private static final long serialVersionUID = 1L;

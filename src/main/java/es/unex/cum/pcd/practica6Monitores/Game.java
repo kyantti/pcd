@@ -1,4 +1,4 @@
-package main.java.es.unex.cum.pcd.practica6Monitores;
+package main.java.es.unex.cum.pcd.practica6monitores;
 
 import java.util.List;
 import java.util.Random;
@@ -14,8 +14,6 @@ public class Game {
     private Lock lock;  //para la exclusion mutua
     private Condition full; //varibale de condicion
     private Condition empty; //varibale de condicion
-    private Condition unoccupied;
-    private Condition occupied;
 
     public Game(int rows, int columns, int maxPlayers, List<Player> players) {
 		board = new Board(rows, columns);
@@ -59,7 +57,7 @@ public class Game {
         this.currentPlayers = currentPlayers;
     }
 
-    public void addPlayer() throws FullGameException, InterruptedException{
+    public void addPlayer() throws InterruptedException{
         Player player = new Player(players.size());
 
         lock.lock();
@@ -82,7 +80,7 @@ public class Game {
         }
     }
 
-    public void removePlayer() throws EmptyGameException, InterruptedException {
+    public void removePlayer() throws InterruptedException {
         Player player = players.get(new Random().nextInt(currentPlayers));
 
         lock.lock();
@@ -103,40 +101,6 @@ public class Game {
 
     }
 
-    public void play() throws InterruptedException{
-        Player player = players.get(new Random().nextInt(currentPlayers));
-        Box box = board.getBoxes()[new Random().nextInt(board.rows())][new Random().nextInt(board.columns())];
-
-        lock.lock();
-        try {
-            while (Boolean.TRUE.equals(box.getOccupied())) {
-                occupied.await();
-            }
-            //sc
-            box.setOccupied(true);
-            box.setPlayerId(player.getId());
-            player.setTokens(player.getTokens() - 1);
-            switch (box.getType()) {
-                case 0:
-                player.setScore(player.getScore() + new Random().nextInt(100));
-                    break;
-                case 1:
-                player.setScore(player.getScore() * new Random().nextInt(4));
-                    break;
-                case 2:
-                
-                    break;
-                default:
-                    break;
-            }
-            
-        }
-        finally{
-            lock.unlock();
-        }
-
-    }
-
     public boolean gameEnded(){
         boolean fin=false;
         if (currentPlayers == 0) {
@@ -146,7 +110,7 @@ public class Game {
         return fin;
     }
 
-    public void countPlayers() throws InterruptedException{
+    public void countPlayers(){
         lock.lock();
         //sc
         System.out.println("Numero de jugadores actual: " + currentPlayers);

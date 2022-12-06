@@ -1,4 +1,4 @@
-package main.java.es.unex.cum.pcd.practica6Monitores;
+package main.java.es.unex.cum.pcd.practica6monitores;
 
 public class PlayerOut implements Runnable {
 
@@ -14,7 +14,8 @@ public class PlayerOut implements Runnable {
             try {
                 game.removePlayer();
                 Thread.sleep(1000);
-            } catch (InterruptedException | EmptyGameException e) {
+            } catch (InterruptedException e) {
+
             }
         }
     }

@@ -1,4 +1,4 @@
-package main.java.es.unex.cum.pcd.practica6Monitores;
+package main.java.es.unex.cum.pcd.practica6monitores;
 
 import java.util.LinkedList;
 import java.util.List;

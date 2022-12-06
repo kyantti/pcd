@@ -1,4 +1,4 @@
-package es.unex.cum.pcd.practica5Semaforos;
+package main.java.es.unex.cum.pcd.practica5semaforos;
 
 import java.util.ArrayList;
 import java.util.List;
