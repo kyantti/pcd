@@ -1,22 +1,24 @@
-package main.java.es.unex.cum.pcd.practicafinal;
+package main.java.es.unex.cum.pcd.practicafinal.app;
 
 public class Box {
     
-    private Boolean occupied;
+    private boolean occupied;
     private int type;
     private int playerId;
 
     public Box(){
-        
+        occupied = false;
+        type = 0;
+        playerId = 0;
     }
 
-    public Box(Boolean occupied, int type, int playerId) {
+    public Box(boolean occupied, int type, int playerId) {
         this.occupied = occupied;
         this.type = type;
         this.playerId = playerId;
     }
 
-    public Boolean getOccupied() {
+    public boolean getOccupied() {
         return occupied;
     }
 

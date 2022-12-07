@@ -1,7 +1,8 @@
-package main.java.es.unex.cum.pcd.practicafinal;
+package main.java.es.unex.cum.pcd.practicafinal.app;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.locks.Condition;
@@ -14,20 +15,24 @@ public class Game {
     private int maxPlayers;
     private int currentPlayers;
     private Lock lock;  //para la exclusion mutua
+    private Lock lock2;
     private Condition full; //varibale de condicion
     private Condition empty; //varibale de condicion
     private Condition unoccupied;
     private Condition occupied;
     private Random rand;
 
-    public Game(int rows, int columns, int maxPlayers, List<Player> players) throws NoSuchAlgorithmException {
+    public Game(int rows, int columns, int maxPlayers) throws NoSuchAlgorithmException {
 		board = new Board(rows, columns);
-        this.players = players;
+        players = new LinkedList<>();
         this.maxPlayers = maxPlayers;
         currentPlayers = players.size();
         lock = new ReentrantLock();
         full = lock.newCondition();
         empty = lock.newCondition(); 
+        lock2 = new ReentrantLock();
+        unoccupied = lock2.newCondition();
+        occupied = lock2.newCondition();
         rand = SecureRandom.getInstanceStrong();
         
 	}
@@ -113,7 +118,7 @@ public class Game {
         Player player = players.get(rand.nextInt(currentPlayers));
         Box box = board.getBoxes()[rand.nextInt(board.rows())][rand.nextInt(board.columns())];
 
-        lock.lock();
+        lock2.lock();
         try {
             while (Boolean.TRUE.equals(box.getOccupied() || player.isNextTurnSkipped())) {
                 occupied.await();
@@ -141,10 +146,14 @@ public class Game {
                 default:
                     break;
             }
+            if (player.isNextTurnSkipped()) {
+                player.setNextTurnSkipped(false);
+            }
+            unoccupied.signal();
             
         }
         finally{
-            lock.unlock();
+            lock2.unlock();
         }
 
     }

@@ -1,10 +1,9 @@
-package main.java.es.unex.cum.pcd.practicafinal;
+package main.java.es.unex.cum.pcd.practicafinal.app;
 
-public class PlayerOut implements Runnable {
-
+public class Play implements Runnable {
     private Game game;
 
-    PlayerOut(Game game){
+    Play(Game game){
         this.game = game;
     }
 
@@ -12,7 +11,7 @@ public class PlayerOut implements Runnable {
     public void run() {
         while (true) {
             try {
-                game.removePlayer();
+                game.play();
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 
@@ -20,4 +19,3 @@ public class PlayerOut implements Runnable {
         }
     }
 }
-

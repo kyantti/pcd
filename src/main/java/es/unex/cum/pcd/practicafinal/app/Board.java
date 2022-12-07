@@ -1,4 +1,4 @@
-package main.java.es.unex.cum.pcd.practicafinal;
+package main.java.es.unex.cum.pcd.practicafinal.app;
 
 import java.util.Random;
 
@@ -13,6 +13,7 @@ public class Board {
         boxes = new Box[rows][columns];
         for (int i = 0; i < boxes.length; i++) {
             for (int j = 0; j < boxes[0].length; j++) {
+                boxes[i][j] = new Box();
                 boxes[i][j].setType(new Random().nextInt(3));
             }
         }

@@ -1,4 +1,4 @@
-package main.java.es.unex.cum.pcd.practicafinal;
+package main.java.es.unex.cum.pcd.practicafinal.app;
 
 import java.util.ArrayList;
 import java.util.List;

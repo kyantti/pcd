@@ -1,4 +1,4 @@
-package main.java.es.unex.cum.pcd.practicafinal;
+package main.java.es.unex.cum.pcd.practicafinal.app;
 
 public class CountPlayers extends Thread {
     private Game game;
