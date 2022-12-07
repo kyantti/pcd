@@ -29,7 +29,6 @@ public class Game {
         lock = new ReentrantLock();
         full = lock.newCondition();
         empty = lock.newCondition(); 
-        lock = new ReentrantLock();
         unoccupied = lock.newCondition();
         occupied = lock.newCondition();
         rand = SecureRandom.getInstanceStrong();
@@ -69,7 +68,13 @@ public class Game {
     }
 
     public void addPlayer() throws InterruptedException{
-        Player player = new Player(players.size());
+        Player player;
+        if (players.isEmpty()) {
+            player = new Player(0);
+        }
+        else{
+            player = new Player(players.size());
+        }
 
         lock.lock();
 
@@ -92,6 +97,7 @@ public class Game {
     }
 
     public void removePlayer() throws InterruptedException {
+       if (!players.isEmpty()) {
         Player player = players.get(rand.nextInt(players.size()));
 
         lock.lock();
@@ -109,53 +115,55 @@ public class Game {
         finally{
             lock.unlock();
         }
+       }
 
     }
 
     public void play() throws InterruptedException {
+        if (currentPlayers > 0) {
+            Player player = players.get(rand.nextInt(currentPlayers));
+            Box box = board.getBoxes()[rand.nextInt(board.rows())][rand.nextInt(board.columns())];
 
-        Player player = players.get(rand.nextInt(currentPlayers));
-        Box box = board.getBoxes()[rand.nextInt(board.rows())][rand.nextInt(board.columns())];
-
-        lock.lock();
-        try {
-            while (Boolean.TRUE.equals(box.getOccupied())) {
-                occupied.await();
-            }
-            if (!player.isNextTurnSkipped()) {
-                // CRITICAL SECTION
-                box.setOccupied(true);
-                box.setPlayerId(player.getId());
-                player.setTokens(player.getTokens() - 1);
-                int pointsEarned = 0;
-                switch (box.getType()) {
-                    case 0:
-                        pointsEarned = rand.nextInt(100);
-                        player.setScore(player.getScore() + pointsEarned);
-                        System.out.println("El juugador " + player.getId() + " ha gando +" + pointsEarned + "puntos");
-                        break;
-                    case 1:
-                        pointsEarned = rand.nextInt(4);
-                        player.setScore(player.getScore() * pointsEarned);
-                        System.out.println("El juugador " + player.getId() + " ha recivido un BOOST de x" + pointsEarned
-                                + "puntos");
-                        break;
-                    case 2:
-                        player.setNextTurnSkipped(true);
-                        System.out.println("El jugador " + player.getId() + " pierde el siguiente turno");
-                        break;
-                    default:
-                        break;
+            lock.lock();
+            try {
+                while (Boolean.TRUE.equals(box.getOccupied())) {
+                    occupied.await();
                 }
+                if (!player.isNextTurnSkipped()) {
+                    // CRITICAL SECTION
+                    box.setOccupied(true);
+                    box.setPlayerId(player.getId());
+                    player.setTokens(player.getTokens() - 1);
+                    int pointsEarned = 0;
+                    switch (box.getType()) {
+                        case 0:
+                            pointsEarned = rand.nextInt(100);
+                            player.setScore(player.getScore() + pointsEarned);
+                            System.out
+                                    .println("El juugador " + player.getId() + " ha gando +" + pointsEarned + "puntos");
+                            break;
+                        case 1:
+                            pointsEarned = rand.nextInt(4);
+                            player.setScore(player.getScore() * pointsEarned);
+                            System.out.println(
+                                    "El juugador " + player.getId() + " ha recivido un BOOST de x" + pointsEarned
+                                            + "puntos");
+                            break;
+                        case 2:
+                            player.setNextTurnSkipped(true);
+                            System.out.println("El jugador " + player.getId() + " pierde el siguiente turno");
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    player.setNextTurnSkipped(false);
+                }
+                unoccupied.signal();
+            } finally {
+                lock.unlock();
             }
-            else{
-                player.setNextTurnSkipped(false);
-            }
-            unoccupied.signal();
-        } finally {
-            lock.unlock();
         }
-
     }
 
     public boolean gameEnded(){

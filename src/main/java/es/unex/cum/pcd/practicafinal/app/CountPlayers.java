@@ -21,8 +21,8 @@ public class CountPlayers extends Thread {
             try {
                 game.countPlayers();
                 Thread.sleep(700);
-            } catch (InterruptedException e1) {
-
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
             }
         }
     }

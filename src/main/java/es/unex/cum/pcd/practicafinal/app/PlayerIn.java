@@ -1,5 +1,7 @@
 package main.java.es.unex.cum.pcd.practicafinal.app;
 
+import org.junit.platform.console.options.Theme;
+
 public class PlayerIn implements Runnable{
 
     private Game game;
@@ -15,7 +17,7 @@ public class PlayerIn implements Runnable{
                 game.addPlayer();
                 Thread.sleep(500);
             } catch (InterruptedException e) {
-                
+                Thread.currentThread().interrupt();
             }
         }
     }

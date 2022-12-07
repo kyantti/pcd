@@ -15,7 +15,7 @@ public class PlayerOut implements Runnable {
                 game.removePlayer();
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                
+                Thread.currentThread().interrupt();
             }
         }
     }
