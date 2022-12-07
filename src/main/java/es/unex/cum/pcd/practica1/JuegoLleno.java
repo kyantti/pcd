@@ -1,4 +1,4 @@
-package es.unex.cum.pcd.practica1;
+package main.java.es.unex.cum.pcd.practica1;
 
 public class JuegoLleno extends Exception{
     private static final long serialVersionUID = 1L;

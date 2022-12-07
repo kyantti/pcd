@@ -1,4 +1,4 @@
-package es.unex.cum.pcd.matrix;
+package main.java.es.unex.cum.pcd.matrix;
 
 import java.io.BufferedReader;
 import java.io.IOException;

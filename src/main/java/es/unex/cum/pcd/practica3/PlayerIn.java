@@ -1,4 +1,4 @@
-package es.unex.cum.pcd.practica3;
+package main.java.es.unex.cum.pcd.practica3;
 
 public class PlayerIn implements Runnable{
 

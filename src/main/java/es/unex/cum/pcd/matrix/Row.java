@@ -1,4 +1,4 @@
-package es.unex.cum.pcd.matrix;
+package main.java.es.unex.cum.pcd.matrix;
 
 public class Row extends Thread {
 

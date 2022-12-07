@@ -1,4 +1,4 @@
-package es.unex.cum.pcd.practica2;
+package main.java.es.unex.cum.pcd.practica2;
 
 public class App {
     public static void main(String[] args) throws Exception {
