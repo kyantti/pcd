@@ -6,6 +6,41 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch SumClient",
+            "request": "launch",
+            "mainClass": "main.java.es.unex.cum.pcd.pasodemensajes.sincrono.clienteservidor.SumClient",
+            "projectName": "pcd_6ebd0cf0"
+        },
+        {
+            "type": "java",
+            "name": "Launch SumServer",
+            "request": "launch",
+            "mainClass": "main.java.es.unex.cum.pcd.pasodemensajes.sincrono.clienteservidor.SumServer",
+            "projectName": "pcd_6ebd0cf0"
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "main.java.es.unex.cum.pcd.semaforos.lectoresescritores.prioridadescritores.App",
+            "projectName": "pcd_6ebd0cf0"
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "main.java.es.unex.cum.pcd.semaforos.lectoresescritores.prioridadlectores.App",
+            "projectName": "pcd_6ebd0cf0"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "main.java.es.unex.cum.pcd.monitores.lectorescritor.Main",
+            "projectName": "pcd_6ebd0cf0"
+        },
+        {
+            "type": "java",
             "name": "Launch App",
             "request": "launch",
             "mainClass": "main.java.es.unex.cum.pcd.practicafinal.app.App",
