@@ -129,6 +129,7 @@ public class Game {
                 while (Boolean.TRUE.equals(box.getOccupied())) {
                     occupied.await();
                 }
+                //SECCION CRITICA
                 if (!player.isNextTurnSkipped()) {
                     // CRITICAL SECTION
                     box.setOccupied(true);
@@ -156,9 +157,11 @@ public class Game {
                         default:
                             break;
                     }
-                } else {
+                }
+                else {
                     player.setNextTurnSkipped(false);
                 }
+                //SECCION CRITICA
                 unoccupied.signal();
             } finally {
                 lock.unlock();
